@@ -1,0 +1,57 @@
+.services {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--title-color);
+  margin-top: 80px;
+  padding-bottom: 40px;
+
+  &__title {
+    padding-top: 50px;
+    margin-left: 200px;
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 138.4%;
+    letter-spacing: 4px;
+    color: rgba(120, 120, 120, 0.31);
+  }
+
+  &__suggestion {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 200px;
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 149.9%;
+    color: rgba(0, 0, 0, 0.71);
+  }
+}
+
+@media (max-width: 820px) {
+  .services {
+    &__title {
+      margin-left: 100px;
+    }
+
+    &__suggestion {
+      margin-left: 100px;
+    }
+  }
+}
+
+
+@media (max-width: 420px) {
+  .services {
+    &__title {
+      margin-left: 82px;
+    }
+
+    &__suggestion {
+      margin-left: 82px;
+      font-size: 18px;
+    }
+  }
+}
