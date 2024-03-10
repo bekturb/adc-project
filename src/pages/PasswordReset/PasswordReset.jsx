@@ -4,6 +4,8 @@ import {Navigate, useParams} from "react-router-dom";
 import {useResetData, useResetPasswordData} from "../../CustomHooks/useForgotPassword";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/ErrorComponent/Error";
+import EyeIcon from "../../static/img/eye-fill.svg"
+import EyeOffIcon from "../../static/img/eye-off-fill.svg"
 
 const PasswordReset = () => {
     const [formData, setFormData] = useState({
@@ -13,6 +15,9 @@ const PasswordReset = () => {
     });
     const [formErrors, setFormErrors] = useState({});
     const [validUrl, setValidUrl] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfPassword, setShowConfPassword] = useState(false);
+
     const param = useParams()
 
     const {data, isLoading} = useResetPasswordData({param});
@@ -74,7 +79,7 @@ const PasswordReset = () => {
                             </div>
                             <div className="field login__field">
                                 <input
-                                    type="text"
+                                    type={showPassword ? "text" : "password"}
                                     name="password"
                                     id="password"
                                     autoComplete="off"
@@ -83,13 +88,14 @@ const PasswordReset = () => {
                                 <label htmlFor="password" className="label-wrapper">
                                     <span className="label-text">пароль</span>
                                 </label>
+                                <img onClick={() => setShowPassword(!showPassword)} className="field__eye" src={showPassword ? EyeOffIcon : EyeIcon} alt="EyeIcon"/>
                             </div>
                             {
                                 formErrors.password && <p className="error">*{formErrors.password}</p>
                             }
                             <div className="field login__field">
                                 <input
-                                    type="text"
+                                    type={showConfPassword ? "text" : "password"}
                                     name="confirmPassword"
                                     id="confirmPassword"
                                     autoComplete="off"
@@ -98,6 +104,7 @@ const PasswordReset = () => {
                                 <label htmlFor="confirmPassword" className="label-wrapper">
                                     <span className="label-text">подтвердите пароль</span>
                                 </label>
+                                <img onClick={() => setShowConfPassword(!showConfPassword)} className="field__eye" src={showConfPassword ? EyeOffIcon : EyeIcon} alt="EyeIcon"/>
                             </div>
                             {
                                 formErrors.confirmPassword && <p className="error">*{formErrors.confirmPassword}</p>

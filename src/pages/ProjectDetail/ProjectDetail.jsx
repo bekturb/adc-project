@@ -15,6 +15,7 @@ import "../../styles/project-detail.scss"
 const ProjectDetail = () => {
     const {projectId} = useParams();
     const [showAllPhotos, setShowAllPhotos] = useState(false);
+
     const [selected, setSelected] = useState("экстерьер");
     const {data, isLoading, isError, error} = useProjectData(projectId);
 

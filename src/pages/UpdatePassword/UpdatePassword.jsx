@@ -3,6 +3,8 @@ import Helmet from "../../layout/Helmet";
 import {useChangePassword} from "../../CustomHooks/useAuth";
 import {Navigate} from "react-router-dom";
 import {showSuccessNotification, showErrorNotification} from "../../CustomHooks/useToast";
+import EyeIcon from "../../static/img/eye-fill.svg"
+import EyeOffIcon from "../../static/img/eye-off-fill.svg"
 
 const UpdatePassword = () => {
 
@@ -12,6 +14,10 @@ const UpdatePassword = () => {
         confirmPassword: "",
     });
     const [formErrors, setFormErrors] = useState({});
+    const [showOldPassword, setShowOldPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfPassword, setShowConfPassword] = useState(false);
+
     const {mutate: updatePassword, data: updatedData, isLoading: updateLoading, isSuccess} = useChangePassword(showSuccessNotification, showErrorNotification);
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -64,7 +70,7 @@ const UpdatePassword = () => {
                         </div>
                         <div className="field login__field">
                             <input
-                                type="password"
+                                type={showOldPassword ? "text" : "password"}
                                 id="oldPassword"
                                 name="oldPassword"
                                 autoComplete="off"
@@ -74,6 +80,7 @@ const UpdatePassword = () => {
                             <label htmlFor="firstName" className="label-wrapper">
                                 <span className="label-text">Старый пароль</span>
                             </label>
+                            <img onClick={() => setShowOldPassword(!showOldPassword)} className="field__eye" src={showOldPassword ? EyeOffIcon : EyeIcon} alt="EyeIcon"/>
                         </div>
                         {
                             formErrors.oldPassword && <p className="error">*{formErrors.oldPassword}</p>
@@ -83,7 +90,7 @@ const UpdatePassword = () => {
                         }
                         <div className="field">
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="newPassword"
                                 id="newPassword"
                                 autoComplete="off"
@@ -93,13 +100,14 @@ const UpdatePassword = () => {
                             <label htmlFor="lastName" className="label-wrapper">
                                 <span className="label-text">Новый пароль</span>
                             </label>
+                            <img onClick={() => setShowPassword(!showPassword)} className="field__eye" src={showPassword ? EyeOffIcon : EyeIcon} alt="EyeIcon"/>
                         </div>
                         {
                             formErrors.newPassword && <p className="error">*{formErrors.newPassword}</p>
                         }
                         <div className="field">
                             <input
-                                type="password"
+                                type={showConfPassword ? "text" : "password"}
                                 name="confirmPassword"
                                 id="confirmPassword"
                                 autoComplete="off"
@@ -109,6 +117,7 @@ const UpdatePassword = () => {
                             <label htmlFor="lastName" className="label-wrapper">
                                 <span className="label-text">Подтвердите пароль</span>
                             </label>
+                            <img onClick={() => setShowConfPassword(!showConfPassword)} className="field__eye" src={showConfPassword ? EyeOffIcon : EyeIcon} alt="EyeIcon"/>
                         </div>
                         {
                             formErrors.confirmPassword && <p className="error">*{formErrors.confirmPassword}</p>

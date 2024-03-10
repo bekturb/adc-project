@@ -35,10 +35,19 @@
   color: #A8A4A4;
   overflow: hidden;
   padding: 10px 0;
+  display: flex;
   &__first{
     width: 300px;
   }
+
+  &__eye {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 20px;
+  }
 }
+
 .field input{
   font-family: 'Mulish',sans-serif;
   font-size: 20px;

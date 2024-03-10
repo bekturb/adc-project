@@ -5,6 +5,8 @@ import {useAddUsersData} from "../../CustomHooks/useUsersData";
 import {useSelector} from "react-redux";
 import {showSuccessNotification, showErrorNotification} from "../../CustomHooks/useToast";
 import HourGlass from "../../Ui/HourGlass/HourGlass";
+import EyeOffIcon from "../../static/img/eye-off-fill.svg";
+import EyeIcon from "../../static/img/eye-fill.svg";
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -15,6 +17,9 @@ const Register = () => {
         confirmPassword: ""
     });
     const [formErrors, setFormErrors] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfPassword, setShowConfPassword] = useState(false);
+
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
     const {mutate:addUser, data:addedUserData, isLoading, isError, error} = useAddUsersData(showSuccessNotification, showErrorNotification);
 
@@ -118,7 +123,7 @@ const Register = () => {
                         }
                         <div className="field login__field">
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 id="password"
                                 autoComplete="off"
@@ -127,13 +132,14 @@ const Register = () => {
                             <label htmlFor="password" className="label-wrapper">
                                 <span className="label-text">пароль</span>
                             </label>
+                            <img onClick={() => setShowPassword(!showPassword)} className="field__eye" src={showPassword ? EyeOffIcon : EyeIcon} alt="EyeIcon"/>
                         </div>
                         {
                             formErrors.password && <p className="error">*{formErrors.password}</p>
                         }
                         <div className="field login__field">
                             <input
-                                type="password"
+                                type={showConfPassword ? "text" : "password"}
                                 name="confirmPassword"
                                 id="confirmPassword"
                                 autoComplete="off"
@@ -142,6 +148,7 @@ const Register = () => {
                             <label htmlFor="confirmPassword" className="label-wrapper">
                                 <span className="label-text">подтвердите пароль</span>
                             </label>
+                            <img onClick={() => setShowConfPassword(!showConfPassword)} className="field__eye" src={showConfPassword ? EyeOffIcon : EyeIcon} alt="EyeIcon"/>
                         </div>
                         {
                             formErrors.confirmPassword && <p className="error">*{formErrors.confirmPassword}</p>

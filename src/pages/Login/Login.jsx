@@ -3,9 +3,11 @@ import Helmet from "../../layout/Helmet";
 import {useAddLoginData, useLoginMe} from "../../CustomHooks/useAuth";
 import {Link, Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import EyeIcon from "../../static/img/eye-fill.svg"
+import EyeOffIcon from "../../static/img/eye-off-fill.svg"
 import {showSuccessNotification, showErrorNotification} from "../../CustomHooks/useToast";
-import "../../styles/login.scss"
 import HourGlass from "../../Ui/HourGlass/HourGlass";
+import "../../styles/login.scss"
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -13,6 +15,7 @@ const Login = () => {
         password: ""
     });
     const [formErrors, setFormErrors] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
 
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
     const {
@@ -91,15 +94,17 @@ const Login = () => {
                         }
                         <div className="field login__field">
                             <input
-                                type="password"
+                                className="field__input"
+                                type={showPassword ? "text" : "password"}
                                 id="password"
                                 name="password"
                                 autoComplete="on"
                                 onChange={handleInputChange}
                             />
                             <label htmlFor="firstName" className="label-wrapper">
-                                <span className="label-text">пароль</span>
+                                <span className="label-text password__span">пароль</span>
                             </label>
+                            <img onClick={() => setShowPassword(!showPassword)} className="field__eye" src={showPassword ? EyeOffIcon : EyeIcon} alt="EyeIcon"/>
                         </div>
                         {
                             formErrors.password && <p className="error">*{formErrors.password}</p>

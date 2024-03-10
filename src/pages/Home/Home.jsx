@@ -3,7 +3,7 @@ import Helmet from "../../layout/Helmet";
 import BgImage from "../../static/img/architecture-bg.png"
 import {Link} from "react-router-dom";
 import {Blurhash} from "react-blurhash";
-import "../../styles/home.scss"
+import "../../styles/home.scss";
 
 const Home = () => {
 
